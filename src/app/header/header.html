@@ -1,6 +1,8 @@
 <header class="header">
   <div class="header-content">
-    <h1 class="app-name">ANIMAL WEB SERVICES</h1>
+    <div class="logo-container">
+      <img src="logo.png" alt="AWS Animal Web Services" class="logo" />
+    </div>
     @if (isAuthenticated()) {
       <button class="logout-button" (click)="onLogout()" type="button">
         Logout

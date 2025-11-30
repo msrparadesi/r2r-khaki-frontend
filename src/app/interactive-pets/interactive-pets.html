@@ -1,0 +1,9 @@
+<div class="pets-container">
+  <div *ngFor="let pet of pets" 
+       class="pet"
+       [class.moving]="pet.isMoving"
+       [class.greeting]="pet.isGreeting"
+       [style.left.%]="pet.position">
+    <span class="pet-emoji">{{ pet.emoji }}</span>
+  </div>
+</div>

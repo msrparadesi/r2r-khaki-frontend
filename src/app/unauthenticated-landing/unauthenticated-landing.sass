@@ -200,3 +200,50 @@
   .btn
     padding: 0.625rem 1.5rem
     font-size: 0.9375rem
+
+
+// Decorative floating pets
+.decorative-pets
+  position: fixed
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  pointer-events: none
+  z-index: -1
+
+.floating-pet
+  position: absolute
+  font-size: 2rem
+  opacity: 0.2
+  animation: floatAround 8s ease-in-out infinite
+
+.pet-1
+  top: 15%
+  left: 10%
+  animation-delay: 0s
+
+.pet-2
+  top: 25%
+  right: 12%
+  animation-delay: 2s
+
+.pet-3
+  bottom: 20%
+  left: 15%
+  animation-delay: 4s
+
+.pet-4
+  bottom: 30%
+  right: 18%
+  animation-delay: 6s
+
+@keyframes floatAround
+  0%, 100%
+    transform: translateY(0) rotate(0deg)
+  25%
+    transform: translateY(-15px) rotate(5deg)
+  50%
+    transform: translateY(-30px) rotate(-5deg)
+  75%
+    transform: translateY(-15px) rotate(5deg)

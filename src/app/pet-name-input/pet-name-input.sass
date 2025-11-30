@@ -1,0 +1,175 @@
+.pet-name-container
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  min-height: 70vh
+  padding: 2rem
+  text-align: center
+  animation: fadeIn 0.6s ease-in
+  position: relative
+
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateY(20px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+.pet-display
+  margin-bottom: 2rem
+  animation: bounceIn 0.8s ease-out
+
+@keyframes bounceIn
+  0%
+    transform: scale(0.3)
+    opacity: 0
+  50%
+    transform: scale(1.05)
+  70%
+    transform: scale(0.9)
+  100%
+    transform: scale(1)
+    opacity: 1
+
+.pet-icon-large
+  font-size: 8rem
+  margin-bottom: 1rem
+  animation: petFloat 3s ease-in-out infinite
+
+@keyframes petFloat
+  0%, 100%
+    transform: translateY(0)
+  50%
+    transform: translateY(-10px)
+
+.title
+  font-size: 2rem
+  color: #2c3e50
+  margin-bottom: 0.5rem
+
+.name-input-section
+  background: white
+  padding: 2.5rem
+  border-radius: 12px
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+  max-width: 500px
+  width: 100%
+
+.instruction
+  font-size: 1.25rem
+  color: #555
+  margin-bottom: 1.5rem
+
+.name-form
+  display: flex
+  flex-direction: column
+  gap: 1.5rem
+
+.input-group
+  position: relative
+
+.pet-name-input
+  width: 100%
+  padding: 1rem 1.5rem
+  font-size: 1.125rem
+  border: 2px solid #ddd
+  border-radius: 8px
+  transition: all 0.3s ease
+
+  &:focus
+    border-color: #3498db
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1)
+    outline: none
+
+  &::placeholder
+    color: #aaa
+
+.btn-submit
+  padding: 1rem 2rem
+  font-size: 1.125rem
+  font-weight: 600
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%)
+  color: white
+  border: none
+  border-radius: 8px
+  transition: all 0.3s ease
+
+  &:hover:not(:disabled)
+    transform: translateY(-2px)
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4)
+
+  &:active:not(:disabled)
+    transform: translateY(0)
+
+  &:disabled
+    background: #bdc3c7
+    cursor: not-allowed
+
+.decorative-pets
+  position: absolute
+  width: 100%
+  height: 100%
+  pointer-events: none
+  z-index: -1
+
+.floating-pet
+  position: absolute
+  font-size: 2rem
+  opacity: 0.3
+  animation: float 4s ease-in-out infinite
+
+.pet-1
+  top: 10%
+  left: 10%
+  animation-delay: 0s
+
+.pet-2
+  top: 20%
+  right: 15%
+  animation-delay: 1s
+
+.pet-3
+  bottom: 15%
+  left: 15%
+  animation-delay: 2s
+
+@keyframes float
+  0%, 100%
+    transform: translateY(0) rotate(0deg)
+  50%
+    transform: translateY(-20px) rotate(10deg)
+
+@media (max-width: 768px)
+  .pet-icon-large
+    font-size: 6rem
+
+  .title
+    font-size: 1.75rem
+
+  .name-input-section
+    padding: 2rem
+
+  .instruction
+    font-size: 1.125rem
+
+@media (max-width: 480px)
+  .pet-name-container
+    padding: 1rem
+
+  .pet-icon-large
+    font-size: 5rem
+
+  .title
+    font-size: 1.5rem
+
+  .name-input-section
+    padding: 1.5rem
+
+  .instruction
+    font-size: 1rem
+
+  .pet-name-input
+    font-size: 1rem
+    padding: 0.875rem 1.25rem

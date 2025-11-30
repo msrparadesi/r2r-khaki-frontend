@@ -4,6 +4,8 @@ import {UnauthenticatedLanding} from './unauthenticated-landing';
 import {AuthenticatedLanding} from './authenticated-landing';
 import {SignUpComponent} from './sign-up';
 import {LoginComponent} from './login';
+import {PetNameInputComponent} from './pet-name-input';
+import {PetMoodSelectionComponent} from './pet-mood-selection';
 import {authGuard} from './guards/auth.guard';
 import {AuthService} from './services/auth.service';
 
@@ -44,19 +46,26 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'dog',
+    path: 'pet-name/:type',
     canActivate: [authGuard],
-    component: AuthenticatedLanding, // Placeholder - will be replaced with pet chat component
+    component: PetNameInputComponent,
+  },
+  {
+    path: 'pet-mood/:type',
+    canActivate: [authGuard],
+    component: PetMoodSelectionComponent,
+  },
+  {
+    path: 'dog',
+    redirectTo: 'pet-name/dog',
   },
   {
     path: 'cat',
-    canActivate: [authGuard],
-    component: AuthenticatedLanding, // Placeholder - will be replaced with pet chat component
+    redirectTo: 'pet-name/cat',
   },
   {
     path: 'hamster',
-    canActivate: [authGuard],
-    component: AuthenticatedLanding, // Placeholder - will be replaced with pet chat component
+    redirectTo: 'pet-name/hamster',
   },
   {
     path: '**',

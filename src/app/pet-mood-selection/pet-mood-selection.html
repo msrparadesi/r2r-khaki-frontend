@@ -1,0 +1,45 @@
+<div class="mood-container">
+  <div class="pet-header">
+    <div class="pet-avatar">{{ petEmoji }}</div>
+    <h1 class="pet-greeting">Hi, I'm {{ petName }}!</h1>
+    <p class="pet-question">How are you feeling today?</p>
+  </div>
+
+  <div class="mood-grid">
+    <button 
+      type="button" 
+      class="mood-button mood-sad"
+      (click)="selectMood('sad')"
+    >
+      <span class="mood-emoji">😢</span>
+      <span class="mood-text">I'm sad</span>
+    </button>
+
+    <button 
+      type="button" 
+      class="mood-button mood-hungry"
+      (click)="selectMood('hungry')"
+    >
+      <span class="mood-emoji">🍕</span>
+      <span class="mood-text">I'm hungry</span>
+    </button>
+
+    <button 
+      type="button" 
+      class="mood-button mood-worried"
+      (click)="selectMood('worried')"
+    >
+      <span class="mood-emoji">😰</span>
+      <span class="mood-text">I'm worried</span>
+    </button>
+
+    <button 
+      type="button" 
+      class="mood-button mood-incredible"
+      (click)="selectMood('incredible')"
+    >
+      <span class="mood-emoji">🦸</span>
+      <span class="mood-text">I'm an incredible human avatar</span>
+    </button>
+  </div>
+</div>

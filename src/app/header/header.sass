@@ -15,12 +15,15 @@
   align-items: center
   gap: 1rem
 
-.app-name
-  font-size: 1.5rem
-  font-weight: 600
-  margin: 0
-  color: #ffffff
-  white-space: nowrap
+.logo-container
+  display: flex
+  align-items: center
+
+.logo
+  height: 60px
+  width: auto
+  object-fit: contain
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
 
 .logout-button
   background-color: #ff4444
@@ -52,8 +55,8 @@
   .header
     padding: 1rem 1.5rem
 
-  .app-name
-    font-size: 1.25rem
+  .logo
+    height: 40px
 
   .logout-button
     padding: 0.4rem 0.8rem
@@ -63,8 +66,8 @@
   .header
     padding: 0.75rem 1rem
 
-  .app-name
-    font-size: 1.125rem
+  .logo
+    height: 35px
 
   .logout-button
     padding: 0.35rem 0.7rem

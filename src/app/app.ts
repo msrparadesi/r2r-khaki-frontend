@@ -2,6 +2,7 @@ import {Component, OnInit, inject} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {Header} from './header';
 import {Footer} from './footer';
+import {InteractivePetsComponent} from './interactive-pets';
 import {AuthService} from './services/auth.service';
 
 /**
@@ -10,7 +11,7 @@ import {AuthService} from './services/auth.service';
  */
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer],
+  imports: [RouterOutlet, Header, Footer, InteractivePetsComponent],
   templateUrl: './app.html',
   styleUrl: './app.sass',
 })

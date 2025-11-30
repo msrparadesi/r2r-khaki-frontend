@@ -1,0 +1,35 @@
+<div class="pet-name-container">
+  <div class="pet-display">
+    <div class="pet-icon-large">{{ petEmoji }}</div>
+    <h1 class="title">Meet Your New {{ petType | titlecase }} Friend!</h1>
+  </div>
+
+  <div class="name-input-section">
+    <p class="instruction">What would you like to name your {{ petType }}?</p>
+    
+    <form (ngSubmit)="onSubmit()" class="name-form">
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="petName"
+          name="petName"
+          placeholder="Enter pet name..."
+          class="pet-name-input"
+          required
+          maxlength="20"
+          autofocus
+        />
+      </div>
+      
+      <button type="submit" class="btn btn-submit" [disabled]="!petName.trim()">
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <div class="decorative-pets">
+    <div class="floating-pet pet-1">🐾</div>
+    <div class="floating-pet pet-2">❤️</div>
+    <div class="floating-pet pet-3">🐾</div>
+  </div>
+</div>
