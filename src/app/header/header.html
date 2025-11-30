@@ -1,0 +1,10 @@
+<header class="header">
+  <div class="header-content">
+    <h1 class="app-name">Khaki Team</h1>
+    @if (isAuthenticated()) {
+      <button class="logout-button" (click)="onLogout()" type="button">
+        Logout
+      </button>
+    }
+  </div>
+</header>

@@ -1,0 +1,19 @@
+<div class="landing-container">
+  <div class="welcome-section">
+    @if (currentUser()) {
+      <h1 class="greeting-title">Welcome back!</h1>
+      <p class="greeting-message">
+        Hello, <span class="user-email">{{ currentUser()!.email }}</span>
+      </p>
+      <p class="welcome-description">
+        You are successfully authenticated and can access all features of the Khaki Team application.
+      </p>
+    }
+  </div>
+
+  <div class="action-buttons">
+    <button class="btn btn-primary" (click)="onLogout()" type="button">
+      Logout
+    </button>
+  </div>
+</div>

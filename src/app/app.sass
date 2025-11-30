@@ -1,0 +1,22 @@
+.app-container
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  background-color: #f5f7fa
+
+.main-content
+  flex: 1
+  padding: 2rem
+  max-width: 1200px
+  width: 100%
+  margin: 0 auto
+  box-sizing: border-box
+
+// Responsive adjustments
+@media (max-width: 768px)
+  .main-content
+    padding: 1.5rem
+
+@media (max-width: 480px)
+  .main-content
+    padding: 1rem

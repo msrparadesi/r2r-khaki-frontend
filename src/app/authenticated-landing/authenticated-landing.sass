@@ -1,0 +1,133 @@
+.landing-container
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  min-height: 60vh
+  padding: 2rem
+  text-align: center
+  animation: fadeIn 0.5s ease-in
+
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateY(20px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+.welcome-section
+  margin-bottom: 3rem
+  max-width: 600px
+  background-color: white
+  padding: 2rem
+  border-radius: 8px
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+
+.greeting-title
+  font-size: 2.5rem
+  font-weight: 600
+  color: #2c3e50
+  margin-bottom: 1rem
+  line-height: 1.2
+
+.greeting-message
+  font-size: 1.25rem
+  line-height: 1.6
+  color: #555
+  margin-bottom: 1rem
+
+.user-email
+  font-weight: 600
+  color: #3498db
+  word-break: break-word
+
+.welcome-description
+  font-size: 1.125rem
+  line-height: 1.6
+  color: #555
+  margin: 0
+
+.action-buttons
+  display: flex
+  gap: 1rem
+  flex-wrap: wrap
+  justify-content: center
+
+.btn
+  padding: 0.75rem 2rem
+  font-size: 1rem
+  font-weight: 500
+  border: none
+  border-radius: 4px
+  cursor: pointer
+  transition: all 0.3s ease
+  min-width: 120px
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+
+  &:active
+    transform: translateY(0)
+
+  &:focus
+    outline: 2px solid currentColor
+    outline-offset: 2px
+
+.btn-primary
+  background-color: #3498db
+  color: white
+
+  &:hover
+    background-color: #2980b9
+
+  &:active
+    background-color: #2471a3
+
+// Responsive adjustments
+@media (max-width: 768px)
+  .landing-container
+    padding: 1.5rem
+    min-height: 50vh
+
+  .welcome-section
+    padding: 1.5rem
+    margin-bottom: 2rem
+
+  .greeting-title
+    font-size: 2rem
+
+  .greeting-message
+    font-size: 1.125rem
+
+  .welcome-description
+    font-size: 1rem
+
+  .action-buttons
+    flex-direction: column
+    width: 100%
+    max-width: 300px
+
+  .btn
+    width: 100%
+
+@media (max-width: 480px)
+  .landing-container
+    padding: 1rem
+
+  .welcome-section
+    padding: 1.25rem
+
+  .greeting-title
+    font-size: 1.75rem
+
+  .greeting-message
+    font-size: 1rem
+
+  .welcome-description
+    font-size: 0.9375rem
+
+  .btn
+    padding: 0.625rem 1.5rem
+    font-size: 0.9375rem
