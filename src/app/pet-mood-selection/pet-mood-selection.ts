@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {PoopAnalysisService} from '../services/poop-analysis.service';
 
 @Component({
   selector: 'app-pet-mood-selection',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './pet-mood-selection.html',
   styleUrl: './pet-mood-selection.sass',
 })
@@ -11,12 +13,23 @@ export class PetMoodSelectionComponent implements OnInit {
   protected petType: string = '';
   protected petName: string = '';
   protected petEmoji: string = '';
+  protected isLoading: boolean = false;
+  protected errorMessage: string = '';
 
   private readonly petEmojis: Record<string, string> = {
     dog: '🐕',
     cat: '🐈',
     hamster: '🐹',
   };
+
+  private readonly moodToPoopData: Record<string, {consistency: string, color: string}> = {
+    sad: { consistency: 'soft', color: 'light brown' },
+    hungry: { consistency: 'firm', color: 'brown' },
+    worried: { consistency: 'loose', color: 'dark brown' },
+    incredible: { consistency: 'firm', color: 'brown' }
+  };
+
+  private readonly poopAnalysisService = inject(PoopAnalysisService);
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -38,10 +51,37 @@ export class PetMoodSelectionComponent implements OnInit {
     // Store selected mood
     sessionStorage.setItem('userMood', mood);
     
-    // TODO: Navigate to chat interface or backend integration
-    console.log(`User selected mood: ${mood} for pet: ${this.petName} (${this.petType})`);
-    
-    // For now, show an alert (will be replaced with actual chat interface)
-    alert(`Great! ${this.petName} will help you with your ${mood} mood. Chat interface coming soon!`);
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    const poopData = this.moodToPoopData[mood] || { consistency: 'firm', color: 'brown' };
+
+    const requestData = {
+      petName: this.petName,
+      petType: this.petType,
+      foodType: 'pedigree',
+      consistency: poopData.consistency,
+      color: poopData.color
+    };
+
+    console.log('Sending analysis request:', requestData);
+
+    this.poopAnalysisService.analyzePoopData(requestData).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        console.log('Analysis response:', response);
+        
+        // Store response in session storage
+        sessionStorage.setItem('analysisResponse', JSON.stringify(response));
+        
+        // Navigate to results page or show results
+        this.router.navigate(['/poopcast']);
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.errorMessage = 'Failed to analyze data. Please try again.';
+        console.error('Analysis error:', error);
+      }
+    });
   }
 }

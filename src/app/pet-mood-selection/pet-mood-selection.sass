@@ -149,3 +149,55 @@
 
     .mood-text
       font-size: 0.9375rem
+
+// Loading state
+.loading-container
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 1rem
+  margin: 2rem 0
+  padding: 2rem
+  background: white
+  border-radius: 12px
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+
+.spinner
+  width: 50px
+  height: 50px
+  border: 5px solid #f3f3f3
+  border-top: 5px solid #FF9500
+  border-radius: 50%
+  animation: spin 1s linear infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.loading-text
+  font-size: 1.125rem
+  color: #555
+  font-weight: 500
+
+// Error message
+.error-message
+  display: flex
+  align-items: center
+  gap: 0.75rem
+  padding: 1rem 1.5rem
+  margin: 1rem 0
+  background: #fee
+  border: 2px solid #e74c3c
+  border-radius: 8px
+  color: #c0392b
+  font-weight: 500
+
+  .error-icon
+    font-size: 1.5rem
+
+// Disabled state
+.mood-grid.disabled
+  opacity: 0.5
+  pointer-events: none

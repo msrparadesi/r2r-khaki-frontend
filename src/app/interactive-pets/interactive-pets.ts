@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 
 interface Pet {
   type: 'dog' | 'cat' | 'hamster';
-  emoji: string;
   position: number;
   isMoving: boolean;
-  isGreeting: boolean;
+  isJumping: boolean;
 }
 
 @Component({
@@ -18,48 +17,56 @@ interface Pet {
 })
 export class InteractivePetsComponent implements OnInit, OnDestroy {
   pets: Pet[] = [
-    { type: 'dog', emoji: '🐕', position: 0, isMoving: false, isGreeting: false },
-    { type: 'cat', emoji: '🐈', position: 0, isMoving: false, isGreeting: false },
-    { type: 'hamster', emoji: '🐹', position: 0, isMoving: false, isGreeting: false }
+    { type: 'dog', position: 0, isMoving: false, isJumping: false },
+    { type: 'cat', position: 0, isMoving: false, isJumping: false },
+    { type: 'hamster', position: 0, isMoving: false, isJumping: false }
   ];
 
-  private intervals: any[] = [];
+  private animationInterval: any;
 
   ngOnInit(): void {
-    this.pets.forEach((pet, index) => {
-      setTimeout(() => {
-        this.startPetAnimation(pet);
-      }, index * 3000);
-    });
+    this.startSynchronizedAnimation();
   }
 
   ngOnDestroy(): void {
-    this.intervals.forEach(interval => clearInterval(interval));
+    if (this.animationInterval) {
+      clearInterval(this.animationInterval);
+    }
   }
 
-  private startPetAnimation(pet: Pet): void {
-    const moveInterval = setInterval(() => {
-      pet.isMoving = true;
-      pet.isGreeting = false;
-      
-      const moveAnimation = setInterval(() => {
-        if (pet.position < 85) {
-          pet.position += 1;
-        }
+  private startSynchronizedAnimation(): void {
+    this.animationInterval = setInterval(() => {
+      // Reset all pets
+      this.pets.forEach(pet => {
+        pet.position = 0;
+        pet.isMoving = true;
+        pet.isJumping = false;
+      });
+
+      // Move phase: 10 seconds
+      const moveInterval = setInterval(() => {
+        this.pets.forEach(pet => {
+          if (pet.position < 85) {
+            pet.position += 0.85; // 85% in 10 seconds = 0.85% per 100ms
+          }
+        });
       }, 100);
 
+      // After 10 seconds, stop moving and start jumping
       setTimeout(() => {
-        clearInterval(moveAnimation);
-        pet.isMoving = false;
-        pet.isGreeting = true;
+        clearInterval(moveInterval);
+        this.pets.forEach(pet => {
+          pet.isMoving = false;
+          pet.isJumping = true;
+        });
 
+        // After 5 more seconds, reset
         setTimeout(() => {
-          pet.position = 0;
-          pet.isGreeting = false;
+          this.pets.forEach(pet => {
+            pet.isJumping = false;
+          });
         }, 5000);
       }, 10000);
-    }, 15000);
-
-    this.intervals.push(moveInterval);
+    }, 15000); // Total cycle: 15 seconds
   }
 }
