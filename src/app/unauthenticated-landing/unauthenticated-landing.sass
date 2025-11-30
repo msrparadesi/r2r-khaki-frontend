@@ -17,8 +17,68 @@
     transform: translateY(0)
 
 .welcome-section
-  margin-bottom: 3rem
+  margin-bottom: 2rem
   max-width: 600px
+
+.carousel-container
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 1rem
+  margin-bottom: 2rem
+
+.carousel-display
+  width: 200px
+  height: 200px
+  display: flex
+  align-items: center
+  justify-content: center
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border-radius: 50%
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2)
+  transition: transform 0.3s ease
+
+  &:hover
+    transform: scale(1.05)
+
+.pet-animal
+  font-size: 6rem
+  line-height: 1
+  animation: fadeInScale 0.5s ease
+
+@keyframes fadeInScale
+  from
+    opacity: 0
+    transform: scale(0.8)
+  to
+    opacity: 1
+    transform: scale(1)
+
+.carousel-btn
+  background: rgba(52, 152, 219, 0.9)
+  color: white
+  border: none
+  border-radius: 50%
+  width: 50px
+  height: 50px
+  font-size: 2rem
+  cursor: pointer
+  transition: all 0.3s ease
+  display: flex
+  align-items: center
+  justify-content: center
+  line-height: 1
+
+  &:hover
+    background: rgba(41, 128, 185, 1)
+    transform: scale(1.1)
+
+  &:active
+    transform: scale(0.95)
+
+  &:focus
+    outline: 2px solid #3498db
+    outline-offset: 2px
 
 .welcome-title
   font-size: 2.5rem
@@ -87,13 +147,25 @@
     min-height: 50vh
 
   .welcome-section
-    margin-bottom: 2rem
+    margin-bottom: 1.5rem
 
   .welcome-title
     font-size: 2rem
 
   .welcome-description
     font-size: 1rem
+
+  .carousel-display
+    width: 150px
+    height: 150px
+
+  .pet-animal
+    font-size: 4.5rem
+
+  .carousel-btn
+    width: 40px
+    height: 40px
+    font-size: 1.5rem
 
   .action-buttons
     flex-direction: column
@@ -112,6 +184,18 @@
 
   .welcome-description
     font-size: 0.9375rem
+
+  .carousel-display
+    width: 120px
+    height: 120px
+
+  .pet-animal
+    font-size: 3.5rem
+
+  .carousel-btn
+    width: 35px
+    height: 35px
+    font-size: 1.25rem
 
   .btn
     padding: 0.625rem 1.5rem

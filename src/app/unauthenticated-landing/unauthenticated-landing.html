@@ -1,10 +1,21 @@
 <div class="landing-container">
   <div class="welcome-section">
-    <h1 class="welcome-title">Welcome to Khaki Team</h1>
+    <h1 class="welcome-title">Welcome to Animal Web Services</h1>
     <p class="welcome-description">
-      Your secure authentication platform powered by AWS Cognito.
-      Sign up to create a new account or log in to access your personalized dashboard.
+      Enterprise-grade agentic AI infrastructure for mission-critical pet communication, predictive defecation analytics, and AI-powered legal defense for household destruction. Because your pet deserves cloud-scale solutions to problems that don't exist. Animal Web Services is a groundbreaking multi-agent AI platform that brings enterprise-grade agentic infrastructure to the most pressing non-issues facing pet owners today. Built on an unnecessarily complex microservices architecture, AWS (the other AWS) delivers several revolutionary capabilities. Sign up or login to see the complete functionality.
     </p>
+  </div>
+
+  <div class="carousel-container">
+    <button class="carousel-btn prev" (click)="previousAnimal()" type="button" aria-label="Previous animal">
+      ‹
+    </button>
+    <div class="carousel-display">
+      <div class="pet-animal">{{ petAnimals[currentIndex] }}</div>
+    </div>
+    <button class="carousel-btn next" (click)="nextAnimal()" type="button" aria-label="Next animal">
+      ›
+    </button>
   </div>
 
   <div class="action-buttons">
