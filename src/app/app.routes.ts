@@ -6,6 +6,7 @@ import {SignUpComponent} from './sign-up';
 import {LoginComponent} from './login';
 import {PetNameInputComponent} from './pet-name-input';
 import {PetMoodSelectionComponent} from './pet-mood-selection';
+import {Poopcast} from './poopcast';
 import {authGuard} from './guards/auth.guard';
 import {AuthService} from './services/auth.service';
 
@@ -54,6 +55,11 @@ export const routes: Routes = [
     path: 'pet-mood/:type',
     canActivate: [authGuard],
     component: PetMoodSelectionComponent,
+  },
+  {
+    path: 'poopcast',
+    canActivate: [authGuard],
+    component: Poopcast,
   },
   {
     path: 'dog',

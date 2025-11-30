@@ -5,11 +5,26 @@
     <p class="pet-question">How are you feeling today?</p>
   </div>
 
-  <div class="mood-grid">
+  @if (isLoading) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p class="loading-text">Analyzing your pet's data...</p>
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="error-message">
+      <span class="error-icon">⚠️</span>
+      <p>{{ errorMessage }}</p>
+    </div>
+  }
+
+  <div class="mood-grid" [class.disabled]="isLoading">
     <button 
       type="button" 
       class="mood-button mood-sad"
       (click)="selectMood('sad')"
+      [disabled]="isLoading"
     >
       <span class="mood-emoji">😢</span>
       <span class="mood-text">I'm sad</span>
@@ -19,6 +34,7 @@
       type="button" 
       class="mood-button mood-hungry"
       (click)="selectMood('hungry')"
+      [disabled]="isLoading"
     >
       <span class="mood-emoji">🍕</span>
       <span class="mood-text">I'm hungry</span>
@@ -28,6 +44,7 @@
       type="button" 
       class="mood-button mood-worried"
       (click)="selectMood('worried')"
+      [disabled]="isLoading"
     >
       <span class="mood-emoji">😰</span>
       <span class="mood-text">I'm worried</span>
@@ -37,6 +54,7 @@
       type="button" 
       class="mood-button mood-incredible"
       (click)="selectMood('incredible')"
+      [disabled]="isLoading"
     >
       <span class="mood-emoji">🦸</span>
       <span class="mood-text">I'm an incredible human avatar</span>
