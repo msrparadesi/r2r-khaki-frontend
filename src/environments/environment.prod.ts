@@ -5,7 +5,7 @@ export const environment = {
   production: true,
   aws: {
     region: 'us-east-1',
-    userPoolId: 'YOUR_USER_POOL_ID',
-    userPoolClientId: 'YOUR_USER_POOL_CLIENT_ID',
+    userPoolId: 'us-east-1_s3LXgbe0Y',
+    userPoolClientId: '5u8lqm5j87emfk64ggdmd5bemf',
   },
 };
