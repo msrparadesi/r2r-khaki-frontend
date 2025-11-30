@@ -9,7 +9,6 @@
   animation: fadeIn 0.5s ease-in
   position: relative
   padding-bottom: 120px
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">🐾</text></svg>') 16 16, auto
 
 @keyframes fadeIn
   from
@@ -164,7 +163,6 @@
   padding: 1.5rem
   border: 3px solid transparent
   border-radius: 12px
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">🐾</text></svg>') 16 16, pointer
   transition: all 0.3s ease
   background-color: #f8f9fa
   min-width: 120px
@@ -230,109 +228,130 @@
 
 .walking-pet
   position: absolute
-  font-size: 3rem
   bottom: 0
-  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2))
   image-rendering: pixelated
   image-rendering: -moz-crisp-edges
   image-rendering: crisp-edges
 
+// Pixel Dog
 .dog-walk
   animation: dogWalkCycle 15s ease-in-out infinite
   animation-delay: 0s
 
+.pixel-dog
+  width: 4px
+  height: 4px
+  background: #8B4513
+  position: relative
+  animation: dogSprite 0.4s steps(2) infinite
+  box-shadow: 0 0 0 0 #8B4513, 4px 0 0 0 #8B4513, 8px 0 0 0 #8B4513, 12px 0 0 0 #8B4513, 16px 0 0 0 #8B4513, 20px 0 0 0 #8B4513, 24px 0 0 0 #8B4513, 0 4px 0 0 #8B4513, 4px 4px 0 0 #654321, 8px 4px 0 0 #654321, 12px 4px 0 0 #000, 16px 4px 0 0 #654321, 20px 4px 0 0 #000, 24px 4px 0 0 #654321, 28px 4px 0 0 #8B4513, 0 8px 0 0 #8B4513, 4px 8px 0 0 #654321, 8px 8px 0 0 #654321, 12px 8px 0 0 #654321, 16px 8px 0 0 #654321, 20px 8px 0 0 #654321, 24px 8px 0 0 #654321, 28px 8px 0 0 #8B4513, 0 12px 0 0 #8B4513, 4px 12px 0 0 #8B4513, 8px 12px 0 0 #654321, 12px 12px 0 0 #654321, 16px 12px 0 0 #654321, 20px 12px 0 0 #654321, 24px 12px 0 0 #8B4513, 28px 12px 0 0 #8B4513, 4px 16px 0 0 #8B4513, 8px 16px 0 0 #8B4513, 12px 16px 0 0 #654321, 16px 16px 0 0 #654321, 20px 16px 0 0 #8B4513, 24px 16px 0 0 #8B4513
+
+// Pixel Cat
 .cat-walk
   animation: catWalkCycle 15s ease-in-out infinite
   animation-delay: 5s
 
-.hamster-ball
+.pixel-cat
+  width: 4px
+  height: 4px
+  background: #FF8C00
+  position: relative
+  animation: catSprite 0.5s steps(2) infinite
+  box-shadow: 4px 0 0 0 #FF8C00, 8px 0 0 0 #FF8C00, 12px 0 0 0 #FF8C00, 16px 0 0 0 #FF8C00, 20px 0 0 0 #FF8C00, 0 4px 0 0 #FF8C00, 4px 4px 0 0 #FF6347, 8px 4px 0 0 #000, 12px 4px 0 0 #FF6347, 16px 4px 0 0 #000, 20px 4px 0 0 #FF6347, 24px 4px 0 0 #FF8C00, 0 8px 0 0 #FF8C00, 4px 8px 0 0 #FF6347, 8px 8px 0 0 #FF6347, 12px 8px 0 0 #FF6347, 16px 8px 0 0 #FF6347, 20px 8px 0 0 #FF6347, 24px 8px 0 0 #FF8C00, 0 12px 0 0 #FF8C00, 4px 12px 0 0 #FF8C00, 8px 12px 0 0 #FF6347, 12px 12px 0 0 #FF6347, 16px 12px 0 0 #FF6347, 20px 12px 0 0 #FF8C00, 24px 12px 0 0 #FF8C00, 8px 16px 0 0 #FF8C00, 12px 16px 0 0 #FF8C00, 16px 16px 0 0 #FF8C00
+
+// Pixel Hamster
+.hamster-walk
   animation: hamsterWalkCycle 15s ease-in-out infinite
   animation-delay: 10s
-  
-  .ball
-    position: relative
-    width: 60px
-    height: 60px
-    border: 3px solid rgba(52, 152, 219, 0.4)
-    border-radius: 50%
-    display: flex
-    align-items: center
-    justify-content: center
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(52, 152, 219, 0.15))
-    box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.2)
 
-  .hamster
-    font-size: 2rem
+.pixel-hamster
+  width: 4px
+  height: 4px
+  background: #F4A460
+  position: relative
+  animation: hamsterSprite 0.3s steps(2) infinite
+  box-shadow: 4px 0 0 0 #F4A460, 8px 0 0 0 #F4A460, 12px 0 0 0 #F4A460, 16px 0 0 0 #F4A460, 0 4px 0 0 #F4A460, 4px 4px 0 0 #DEB887, 8px 4px 0 0 #000, 12px 4px 0 0 #DEB887, 16px 4px 0 0 #000, 20px 4px 0 0 #F4A460, 0 8px 0 0 #F4A460, 4px 8px 0 0 #DEB887, 8px 8px 0 0 #DEB887, 12px 8px 0 0 #DEB887, 16px 8px 0 0 #DEB887, 20px 8px 0 0 #F4A460, 0 12px 0 0 #F4A460, 4px 12px 0 0 #F4A460, 8px 12px 0 0 #FFB6C1, 12px 12px 0 0 #FFB6C1, 16px 12px 0 0 #F4A460, 20px 12px 0 0 #F4A460, 8px 16px 0 0 #F4A460, 12px 16px 0 0 #F4A460
 
-@keyframes dogWalkCycle
+// Sprite animations for walking effect
+@keyframes dogSprite
   0%
-    left: -100px
-  10%, 20%, 30%, 40%, 50%, 60%
-    animation-timing-function: steps(2)
-  66.67%
-    left: calc(100% + 100px)
-  68%
-    left: 20%
-    transform: scaleX(-1)
-  70%, 74%
-    transform: scaleX(-1) rotate(-5deg)
-  72%, 76%, 100%
-    transform: scaleX(-1) rotate(0)
-
-@keyframes catWalkCycle
-  0%
-    left: -100px
-  10%, 30%, 50%
-    transform: translateY(-3px)
-  20%, 40%, 60%
-    transform: translateY(0)
-  66.67%
-    left: calc(100% + 100px)
-  68%
-    left: 50%
-    transform: scaleX(-1)
-  75%
-    transform: scaleX(-1) scaleY(0.8)
-  100%
-    left: 50%
-    transform: scaleX(-1) scaleY(0.85) translateY(5px)
-
-@keyframes hamsterWalkCycle
-  0%
-    left: -100px
-  15%, 35%, 55%
-    transform: translateY(-8px)
-  25%, 45%, 65%
-    transform: translateY(0)
-  66.67%
-    left: calc(100% + 100px)
-  68%, 100%
-    left: 70%
-  70%
-    transform: translateY(-15px)
-  75%
-    transform: translateY(-5px)
-  80%
-    transform: translateY(0)
-
-.hamster-ball
-  .ball
-    animation: hamsterBallRoll 15s ease-in-out infinite
-    animation-delay: 10s
-  .hamster
-    animation: hamsterBounce 0.5s ease-in-out infinite
-
-@keyframes hamsterBallRoll
-  0%, 68%
-    transform: rotate(0deg)
-  66.67%, 100%
-    transform: rotate(3600deg)
-
-@keyframes hamsterBounce
-  0%, 100%
     transform: translateY(0)
   50%
     transform: translateY(-3px)
+
+@keyframes catSprite
+  0%
+    transform: translateY(0)
+  50%
+    transform: translateY(-2px)
+
+@keyframes hamsterSprite
+  0%
+    transform: translateY(0) rotate(0deg)
+  50%
+    transform: translateY(-2px) rotate(3deg)
+
+// Movement cycles
+@keyframes dogWalkCycle
+  0%
+    left: -60px
+  66.67%
+    left: calc(100% + 60px)
+  68%
+    left: 20%
+    transform: scaleX(-1)
+  70%
+    transform: scaleX(-1) translateY(-4px)
+  72%
+    transform: scaleX(-1) translateY(0)
+  74%
+    transform: scaleX(-1) translateY(-4px)
+  76%
+    transform: scaleX(-1) translateY(0)
+  100%
+    left: 20%
+    transform: scaleX(-1)
+
+@keyframes catWalkCycle
+  0%
+    left: -50px
+  66.67%
+    left: calc(100% + 50px)
+  68%
+    left: 50%
+    transform: scaleX(-1)
+  72%
+    transform: scaleX(-1) scaleY(1.1) scaleX(-1.1)
+  76%
+    transform: scaleX(-1) scaleY(0.9) scaleX(-0.9)
+  80%
+    transform: scaleX(-1) scaleY(1)
+  85%
+    transform: scaleX(-1) translateY(3px)
+  100%
+    left: 50%
+    transform: scaleX(-1) translateY(3px)
+
+@keyframes hamsterWalkCycle
+  0%
+    left: -45px
+  66.67%
+    left: calc(100% + 45px)
+  68%
+    left: 70%
+  70%
+    transform: translateY(-10px) scale(1.1)
+  72%
+    transform: translateY(0) scale(1)
+  74%
+    transform: translateY(-6px) scale(1.05)
+  76%
+    transform: translateY(0) scale(1)
+  78%
+    transform: translateY(-3px) scale(1.02)
+  80%, 100%
+    left: 70%
+    transform: translateY(0) scale(1)
 
 // Responsive adjustments for pet selection
 @media (max-width: 768px)
@@ -356,15 +375,17 @@
   .pet-label
     font-size: 1rem
 
-  .walking-pet
-    font-size: 2.5rem
+  .pixel-dog
+    width: 40px
+    height: 40px
 
-  .hamster-ball .ball
-    width: 50px
-    height: 50px
+  .pixel-cat
+    width: 32px
+    height: 32px
 
-  .hamster-ball .hamster
-    font-size: 1.5rem
+  .pixel-hamster
+    width: 28px
+    height: 28px
 
 @media (max-width: 480px)
   .pet-selection
@@ -386,12 +407,14 @@
   .pet-label
     font-size: 0.9375rem
 
-  .walking-pet
-    font-size: 2rem
+  .pixel-dog
+    width: 32px
+    height: 32px
 
-  .hamster-ball .ball
-    width: 40px
-    height: 40px
+  .pixel-cat
+    width: 28px
+    height: 28px
 
-  .hamster-ball .hamster
-    font-size: 1.25rem
+  .pixel-hamster
+    width: 24px
+    height: 24px
