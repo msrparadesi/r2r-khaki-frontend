@@ -4,6 +4,8 @@ import {
   SignUpCommand,
   InitiateAuthCommand,
   GetUserCommand,
+  ConfirmSignUpCommand,
+  ResendConfirmationCodeCommand,
 } from '@aws-sdk/client-cognito-identity-provider';
 import {environment} from '../../environments/environment';
 import {SignUpResult, AuthTokens, UserInfo} from '../models';
@@ -64,6 +66,60 @@ export class CognitoService {
               }
             : undefined,
         };
+      },
+      {
+        maxAttempts: 3,
+        initialDelay: 1000,
+        shouldRetry: isNetworkError,
+      },
+    );
+  }
+
+  /**
+   * Confirm user sign-up with verification code.
+   * Invokes the ConfirmSignUp operation to verify the user's email.
+   * Retries on network failures with exponential backoff.
+   *
+   * @param email - User's email address (username)
+   * @param code - Verification code sent to user's email
+   * @returns Promise resolving when confirmation is successful
+   */
+  async confirmSignUp(email: string, code: string): Promise<void> {
+    return retryWithBackoff(
+      async () => {
+        const command = new ConfirmSignUpCommand({
+          ClientId: this.userPoolClientId,
+          Username: email,
+          ConfirmationCode: code,
+        });
+
+        await this.client.send(command);
+      },
+      {
+        maxAttempts: 3,
+        initialDelay: 1000,
+        shouldRetry: isNetworkError,
+      },
+    );
+  }
+
+  /**
+   * Resend confirmation code to user's email.
+   * Invokes the ResendConfirmationCode operation.
+   * Retries on network failures with exponential backoff.
+   *
+   * @param email - User's email address (username)
+   * @returns Promise resolving when code is resent
+   */
+  async resendConfirmationCode(email: string): Promise<void> {
+    return retryWithBackoff(
+      async () => {
+        const command = new ResendConfirmationCodeCommand({
+          ClientId: this.userPoolClientId,
+          Username: email,
+        });
+
+        await this.client.send(command);
       },
       {
         maxAttempts: 3,

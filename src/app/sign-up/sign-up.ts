@@ -17,9 +17,16 @@ import {LoadingSpinnerComponent} from '../loading-spinner';
 })
 export class SignUpComponent {
   protected signUpForm: FormGroup;
+  protected confirmationForm: FormGroup;
   protected successMessage: string | null = null;
   protected errorMessage: string | null = null;
+  protected confirmationMessage: string | null = null;
+  protected confirmationError: string | null = null;
   protected isSubmitting = false;
+  protected isConfirming = false;
+  protected isResending = false;
+  protected showConfirmation = false;
+  protected userEmail = '';
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -36,6 +43,10 @@ export class SignUpComponent {
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/),
         ],
       ],
+    });
+
+    this.confirmationForm = this.formBuilder.group({
+      code: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
     });
   }
 
@@ -60,12 +71,12 @@ export class SignUpComponent {
 
       if (result.userConfirmed) {
         this.successMessage = 'Account created successfully! You can now log in.';
+        this.signUpForm.reset();
       } else {
-        this.successMessage =
-          'Account created! Please check your email for a verification code.';
+        this.userEmail = email;
+        this.showConfirmation = true;
+        this.successMessage = 'Account created! Please enter the verification code sent to your email.';
       }
-
-      this.signUpForm.reset();
     } catch (error) {
       if (error instanceof Error) {
         this.errorMessage = this.getErrorMessage(error);
@@ -74,6 +85,62 @@ export class SignUpComponent {
       }
     } finally {
       this.isSubmitting = false;
+    }
+  }
+
+  /**
+   * Handle confirmation code submission.
+   * Calls AuthService.confirmSignUp with email and code.
+   */
+  protected async onConfirmSubmit(): Promise<void> {
+    if (this.confirmationForm.invalid) {
+      this.confirmationForm.markAllAsTouched();
+      return;
+    }
+
+    this.isConfirming = true;
+    this.confirmationMessage = null;
+    this.confirmationError = null;
+
+    const {code} = this.confirmationForm.value;
+
+    try {
+      await this.authService.confirmSignUp(this.userEmail, code);
+      this.confirmationMessage = 'Email verified successfully! Redirecting to login...';
+      
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000);
+    } catch (error) {
+      if (error instanceof Error) {
+        this.confirmationError = this.getConfirmationErrorMessage(error);
+      } else {
+        this.confirmationError = 'Verification failed. Please try again.';
+      }
+    } finally {
+      this.isConfirming = false;
+    }
+  }
+
+  /**
+   * Resend confirmation code to user's email.
+   */
+  protected async resendCode(): Promise<void> {
+    this.isResending = true;
+    this.confirmationMessage = null;
+    this.confirmationError = null;
+
+    try {
+      await this.authService.resendConfirmationCode(this.userEmail);
+      this.confirmationMessage = 'Verification code resent! Please check your email.';
+    } catch (error) {
+      if (error instanceof Error) {
+        this.confirmationError = error.message || 'Failed to resend code. Please try again.';
+      } else {
+        this.confirmationError = 'Failed to resend code. Please try again.';
+      }
+    } finally {
+      this.isResending = false;
     }
   }
 
@@ -158,5 +225,60 @@ export class SignUpComponent {
     }
 
     return null;
+  }
+
+  /**
+   * Get validation error message for confirmation code field.
+   *
+   * @returns Error message or null
+   */
+  protected getCodeError(): string | null {
+    const field = this.confirmationForm.get('code');
+
+    if (!field || !field.touched || !field.errors) {
+      return null;
+    }
+
+    if (field.errors['required']) {
+      return 'Verification code is required.';
+    }
+
+    if (field.errors['pattern']) {
+      return 'Verification code must be 6 digits.';
+    }
+
+    return null;
+  }
+
+  /**
+   * Get user-friendly error message for confirmation errors.
+   *
+   * @param error - Error from authentication service
+   * @returns User-friendly error message
+   */
+  private getConfirmationErrorMessage(error: Error): string {
+    const message = error.message.toLowerCase();
+
+    if (message.includes('code mismatch') || message.includes('invalid code')) {
+      return 'Invalid verification code. Please check and try again.';
+    }
+
+    if (message.includes('expired')) {
+      return 'Verification code has expired. Please request a new code.';
+    }
+
+    if (message.includes('limit exceeded') || message.includes('too many attempts')) {
+      return 'Too many attempts. Please wait a few minutes and try again.';
+    }
+
+    if (message.includes('user not found')) {
+      return 'User not found. Please sign up again.';
+    }
+
+    if (message.includes('already confirmed')) {
+      return 'This account is already verified. You can log in now.';
+    }
+
+    return error.message || 'Verification failed. Please try again.';
   }
 }

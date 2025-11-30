@@ -1,71 +1,137 @@
 <div class="sign-up-container">
   <div class="sign-up-card">
-    <h1>Create Account</h1>
-    <p class="subtitle">Join Khaki Team to get started</p>
+    @if (!showConfirmation) {
+      <h1>Create Account</h1>
+      <p class="subtitle">Join Khaki Team to get started</p>
 
-    @if (successMessage) {
-      <div class="message success-message">
-        {{ successMessage }}
+      @if (successMessage) {
+        <div class="message success-message">
+          {{ successMessage }}
+        </div>
+      }
+
+      @if (errorMessage) {
+        <div class="message error-message">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            [class.invalid]="getFieldError('email')"
+          />
+          @if (getFieldError('email')) {
+            <span class="error-text">{{ getFieldError('email') }}</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            [class.invalid]="getFieldError('password')"
+          />
+          @if (getFieldError('password')) {
+            <span class="error-text">{{ getFieldError('password') }}</span>
+          }
+          <span class="hint">
+            Must be at least 8 characters with uppercase, lowercase, number, and special character
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="isSubmitting"
+        >
+          @if (isSubmitting) {
+            <app-loading-spinner [show]="true" [inline]="true" [size]="20"></app-loading-spinner>
+            <span>Creating Account...</span>
+          } @else {
+            <span>Sign Up</span>
+          }
+        </button>
+      </form>
+
+      <div class="login-link">
+        Already have an account?
+        <button type="button" class="link-button" (click)="navigateToLogin()">
+          Log in
+        </button>
+      </div>
+    } @else {
+      <h1>Verify Your Email</h1>
+      <p class="subtitle">Enter the 6-digit code sent to {{ userEmail }}</p>
+
+      @if (confirmationMessage) {
+        <div class="message success-message">
+          {{ confirmationMessage }}
+        </div>
+      }
+
+      @if (confirmationError) {
+        <div class="message error-message">
+          {{ confirmationError }}
+        </div>
+      }
+
+      <form [formGroup]="confirmationForm" (ngSubmit)="onConfirmSubmit()">
+        <div class="form-group">
+          <label for="code">Verification Code</label>
+          <input
+            id="code"
+            type="text"
+            formControlName="code"
+            placeholder="Enter 6-digit code"
+            maxlength="6"
+            [class.invalid]="getCodeError()"
+          />
+          @if (getCodeError()) {
+            <span class="error-text">{{ getCodeError() }}</span>
+          }
+          <span class="hint">
+            Check your email for the verification code
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="isConfirming"
+        >
+          @if (isConfirming) {
+            <app-loading-spinner [show]="true" [inline]="true" [size]="20"></app-loading-spinner>
+            <span>Verifying...</span>
+          } @else {
+            <span>Verify Email</span>
+          }
+        </button>
+      </form>
+
+      <div class="resend-link">
+        Didn't receive the code?
+        <button 
+          type="button" 
+          class="link-button" 
+          (click)="resendCode()"
+          [disabled]="isResending"
+        >
+          @if (isResending) {
+            Resending...
+          } @else {
+            Resend code
+          }
+        </button>
       </div>
     }
-
-    @if (errorMessage) {
-      <div class="message error-message">
-        {{ errorMessage }}
-      </div>
-    }
-
-    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Enter your email"
-          [class.invalid]="getFieldError('email')"
-        />
-        @if (getFieldError('email')) {
-          <span class="error-text">{{ getFieldError('email') }}</span>
-        }
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          formControlName="password"
-          placeholder="Enter your password"
-          [class.invalid]="getFieldError('password')"
-        />
-        @if (getFieldError('password')) {
-          <span class="error-text">{{ getFieldError('password') }}</span>
-        }
-        <span class="hint">
-          Must be at least 8 characters with uppercase, lowercase, number, and special character
-        </span>
-      </div>
-
-      <button
-        type="submit"
-        class="submit-button"
-        [disabled]="isSubmitting"
-      >
-        @if (isSubmitting) {
-          <app-loading-spinner [show]="true" [inline]="true" [size]="20"></app-loading-spinner>
-          <span>Creating Account...</span>
-        } @else {
-          <span>Sign Up</span>
-        }
-      </button>
-    </form>
-
-    <div class="login-link">
-      Already have an account?
-      <button type="button" class="link-button" (click)="navigateToLogin()">
-        Log in
-      </button>
-    </div>
   </div>
 </div>
