@@ -52,6 +52,37 @@ export class AuthService {
   }
 
   /**
+   * Confirm user sign-up with verification code.
+   * Verifies the user's email address using the code sent via email.
+   *
+   * @param email - User's email address
+   * @param code - Verification code from email
+   * @returns Promise resolving when confirmation is successful
+   */
+  async confirmSignUp(email: string, code: string): Promise<void> {
+    try {
+      await this.cognitoService.confirmSignUp(email, code);
+    } catch (error) {
+      throw this.handleAuthError(error);
+    }
+  }
+
+  /**
+   * Resend confirmation code to user's email.
+   * Useful when the original code expires or is lost.
+   *
+   * @param email - User's email address
+   * @returns Promise resolving when code is resent
+   */
+  async resendConfirmationCode(email: string): Promise<void> {
+    try {
+      await this.cognitoService.resendConfirmationCode(email);
+    } catch (error) {
+      throw this.handleAuthError(error);
+    }
+  }
+
+  /**
    * Authenticate a user with email and password.
    * Stores tokens and user information on success.
    *

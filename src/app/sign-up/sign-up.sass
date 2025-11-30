@@ -144,7 +144,7 @@ input
     outline: 2px solid #4a90e2
     outline-offset: 2px
 
-.login-link
+.login-link, .resend-link
   margin-top: 1.5rem
   text-align: center
   color: #666
@@ -161,8 +161,13 @@ input
   margin-left: 0.25rem
   transition: color 0.2s ease
 
-  &:hover
+  &:hover:not(:disabled)
     color: #357abd
+
+  &:disabled
+    color: #999
+    cursor: not-allowed
+    text-decoration: none
 
   &:focus
     outline: 2px solid #4a90e2

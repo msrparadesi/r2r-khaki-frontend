@@ -71,12 +71,38 @@ The project uses:
 
 Run tests with: `npm test`
 
+## Authentication Flow
+
+### Sign-Up Process
+
+The application implements a complete AWS Cognito sign-up flow with email verification:
+
+1. **User Registration**: Users provide email and password
+2. **Email Verification**: After successful registration, users receive a 6-digit verification code via email
+3. **Code Confirmation**: Users enter the verification code to confirm their account
+4. **Account Activation**: Once confirmed, users can log in
+
+### Key Features
+
+- **Email Verification**: Automatic verification code delivery via AWS Cognito
+- **Code Resend**: Users can request a new verification code if needed
+- **Error Handling**: Comprehensive error messages for various scenarios (invalid code, expired code, etc.)
+- **Retry Logic**: Network failures are automatically retried with exponential backoff
+- **User-Friendly UI**: Clear feedback and loading states throughout the process
+
+### Cognito User Pool Requirements
+
+For the email verification flow to work, ensure your Cognito User Pool is configured with:
+- Email as a required attribute
+- Email verification enabled
+- Email delivery configured (either Cognito default or Amazon SES)
+
 ## Next Steps
 
 1. Configure AWS Cognito User Pool settings in environment files
-2. Implement authentication services and components
-3. Add routing and guards for protected routes
-4. Implement UI components for sign-up, login, and authenticated views
+2. Ensure email verification is enabled in your Cognito User Pool
+3. Test the complete sign-up and verification flow
+4. Customize email templates in AWS Cognito console (optional)
 
 ## Notes
 
