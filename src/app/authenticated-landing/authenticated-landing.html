@@ -6,14 +6,54 @@
         Hello, <span class="user-email">{{ currentUser()!.email }}</span>
       </p>
       <p class="welcome-description">
-        You are successfully authenticated and can access all features of the Khaki Team application.
+        Choose your pet companion to start chatting!
       </p>
     }
+  </div>
+
+  <div class="pet-selection">
+    <h2 class="pet-selection-title">Select Your Pet</h2>
+    <div class="pet-icons">
+      <div 
+        class="pet-icon" 
+        (click)="selectPet('dog')"
+      >
+        <div class="pet-emoji">🐕</div>
+        <span class="pet-label">Dog</span>
+        <div class="heart-animation">❤️</div>
+      </div>
+      <div 
+        class="pet-icon" 
+        (click)="selectPet('cat')"
+      >
+        <div class="pet-emoji">🐈</div>
+        <span class="pet-label">Cat</span>
+        <div class="heart-animation">❤️</div>
+      </div>
+      <div 
+        class="pet-icon" 
+        (click)="selectPet('hamster')"
+      >
+        <div class="pet-emoji">🐹</div>
+        <span class="pet-label">Hamster</span>
+        <div class="heart-animation">❤️</div>
+      </div>
+    </div>
   </div>
 
   <div class="action-buttons">
     <button class="btn btn-primary" (click)="onLogout()" type="button">
       Logout
     </button>
+  </div>
+
+  <div class="walking-pets">
+    <div class="walking-pet dog-walk">🐕</div>
+    <div class="walking-pet cat-walk">🐈</div>
+    <div class="walking-pet hamster-ball">
+      <div class="ball">
+        <div class="hamster">🐹</div>
+      </div>
+    </div>
   </div>
 </div>

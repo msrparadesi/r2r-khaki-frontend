@@ -1,5 +1,8 @@
 import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
+
+type PetType = 'dog' | 'cat' | 'hamster';
 
 /**
  * Authenticated landing page component.
@@ -13,6 +16,7 @@ import {AuthService} from '../services/auth.service';
 })
 export class AuthenticatedLanding {
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   protected readonly currentUser = this.authService.currentUser;
 
@@ -22,5 +26,12 @@ export class AuthenticatedLanding {
    */
   protected async onLogout(): Promise<void> {
     await this.authService.signOut();
+  }
+
+  /**
+   * Navigate to pet chat route.
+   */
+  protected selectPet(pet: PetType): void {
+    this.router.navigate([`/${pet}`]);
   }
 }
