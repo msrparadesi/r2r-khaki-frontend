@@ -44,6 +44,21 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'dog',
+    canActivate: [authGuard],
+    component: AuthenticatedLanding, // Placeholder - will be replaced with pet chat component
+  },
+  {
+    path: 'cat',
+    canActivate: [authGuard],
+    component: AuthenticatedLanding, // Placeholder - will be replaced with pet chat component
+  },
+  {
+    path: 'hamster',
+    canActivate: [authGuard],
+    component: AuthenticatedLanding, // Placeholder - will be replaced with pet chat component
+  },
+  {
     path: '**',
     redirectTo: '',
   },
