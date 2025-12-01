@@ -1,1 +1,140 @@
-<p>poopcast works!</p>
+<div class="poopcast-container">
+  <h1 class="page-title">Pet Dashboard</h1>
+  <p class="page-subtitle">{{ petName }}'s Health & Fun Center</p>
+
+  <div class="tabs">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'poop'"
+      (click)="selectTab('poop')"
+    >
+      💩 Poop Analysis
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'audio'"
+      (click)="selectTab('audio')"
+    >
+      🔊 Pet Sounds
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'avatar'"
+      (click)="selectTab('avatar')"
+    >
+      🎨 Avatar Generator
+    </button>
+  </div>
+
+  <div class="tab-content">
+    <!-- Poop Analysis Tab -->
+    @if (activeTab === 'poop') {
+      <div class="tab-panel">
+        <h2>Poop Health Analysis</h2>
+        <p class="tab-description">Analyze your pet's digestive health based on poop characteristics.</p>
+        
+        <button class="action-button" (click)="analyzePoopData()" [disabled]="poopLoading">
+          @if (poopLoading) {
+            <span class="spinner"></span> Analyzing...
+          } @else {
+            Analyze Now
+          }
+        </button>
+
+        @if (poopError) {
+          <div class="error-message">{{ poopError }}</div>
+        }
+
+        @if (poopResult) {
+          <div class="result-container">
+            <h3>Analysis Results</h3>
+            <pre class="result-json">{{ formatJson(poopResult) }}</pre>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Pet Audio Tab -->
+    @if (activeTab === 'audio') {
+      <div class="tab-panel">
+        <h2>Random Pet Sounds</h2>
+        <p class="tab-description">Get a random {{ petType }} sound info!</p>
+        
+        <button class="action-button" (click)="fetchRandomAudio()" [disabled]="audioLoading">
+          @if (audioLoading) {
+            <span class="spinner"></span> Fetching...
+          } @else {
+            Get Random Sound
+          }
+        </button>
+
+        @if (audioError) {
+          <div class="error-message">{{ audioError }}</div>
+        }
+
+        @if (audioResult) {
+          <div class="result-container">
+            <h3>Audio Info</h3>
+            @if (audioResult.filename) {
+              <p class="audio-info">🎵 File: <strong>{{ audioResult.filename }}</strong></p>
+            }
+            <pre class="result-json">{{ formatJson(audioResult) }}</pre>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- Avatar Generator Tab -->
+    @if (activeTab === 'avatar') {
+      <div class="tab-panel">
+        <h2>Pet Avatar Generator</h2>
+        <p class="tab-description">Upload a photo of your pet to generate a fun avatar!</p>
+        
+        <div class="file-upload">
+          <label class="upload-label">
+            <input 
+              type="file" 
+              accept="image/*" 
+              (change)="onFileSelected($event)"
+              [disabled]="avatarLoading"
+            />
+            <span class="upload-button">
+              @if (avatarLoading) {
+                <span class="spinner"></span> Generating...
+              } @else {
+                Choose Image
+              }
+            </span>
+          </label>
+        </div>
+
+        @if (avatarError) {
+          <div class="error-message">{{ avatarError }}</div>
+        }
+
+        <div class="avatar-preview-container">
+          @if (selectedImagePreview) {
+            <div class="preview-box">
+              <h4>Original</h4>
+              <img [src]="selectedImagePreview" alt="Selected image" class="preview-image" />
+            </div>
+          }
+
+          @if (avatarBase64) {
+            <div class="preview-box">
+              <h4>Generated Avatar</h4>
+              <img [src]="'data:image/png;base64,' + avatarBase64" alt="Generated avatar" class="preview-image" />
+            </div>
+          }
+        </div>
+
+        @if (avatarResult) {
+          <div class="result-container">
+            <h3>Response Data</h3>
+            <pre class="result-json">{{ formatJson(avatarResult) }}</pre>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
